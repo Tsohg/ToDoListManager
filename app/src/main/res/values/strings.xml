@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">To Do List Manager</string>
+    <string name="dots_vertical">⋮</string>
+    <string name="input_title_text">Input To Do List Item Info Below:</string>
+    <string name="due_date_hint">Due Date: ##-##</string>
+    <string name="name_todo_hint">Name of To Do Item</string>
+    <string name="desc_todo_hint">Description of To Do Item</string>
+    <string name="dueDateButtonText">Set Due Date</string>
+</resources>

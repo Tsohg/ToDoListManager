@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:visibility="visible"
+    >
+
+    <TextView
+        android:layout_width="100dp"
+        android:layout_height="match_parent"
+        android:id="@+id/dueDateView"
+        android:text="#/##"
+        android:textSize="20dp"
+        android:textAlignment="center"
+        android:gravity="center_vertical"
+        />
+
+    <TextView
+        android:layout_width="260dp"
+        android:layout_height="match_parent"
+        android:text="placeholderText"
+        android:textSize="30dp"
+        android:paddingLeft="10dp"
+        android:gravity="center_vertical"
+        android:id="@+id/nameView"
+        android:layout_toRightOf="@+id/dueDateView"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_toRightOf="@+id/nameView"
+        android:text="@string/dots_vertical"
+        android:textSize="40dp"
+        android:textAlignment="center"
+        android:gravity="center_vertical"
+        android:id="@+id/optionDotsView"
+        />
+
+</RelativeLayout>

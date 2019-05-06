@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddListItemActivity"
+    android:background="@color/white"
+    >
+
+    <TextView
+        android:id="@+id/titleInput"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:text="@string/input_title_text"
+        android:textColor="@color/black"
+        android:layout_marginTop="60dp"
+        android:layout_marginLeft="60dp"
+        android:layout_marginRight="60dp"
+        android:textSize="20dp"
+        android:layout_marginBottom="30dp"
+        />
+
+    <!--<EditText-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:hint="@string/due_date_hint"-->
+        <!--android:textColorHint="@color/hintGray"-->
+        <!--android:layout_below="@+id/titleInput"-->
+        <!--android:id="@+id/dueDateEditText"-->
+        <!--android:textColor="@color/black"-->
+        <!--android:backgroundTint="@color/black"-->
+        <!--android:layout_marginLeft="20dp"-->
+        <!--android:layout_marginRight="60dp"-->
+        <!--/>-->
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/titleInput"
+        android:id="@+id/dueDateButton"
+        android:text="@string/dueDateButtonText"
+        android:layout_centerHorizontal="true"
+        android:onClick="showDatePicker"
+        android:layout_marginBottom="20dp"
+        />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textColorHint="@color/hintGray"
+        android:layout_below="@+id/dueDateButton"
+        android:hint="@string/name_todo_hint"
+        android:id="@+id/nameEditText"
+        android:backgroundTint="@color/black"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="60dp"
+        />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/nameEditText"
+        android:id="@+id/descEditText"
+        android:hint="@string/desc_todo_hint"
+        android:textColorHint="@color/hintGray"
+        android:textColor="@color/black"
+        android:backgroundTint="@color/black"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="60dp"
+        />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/descEditText"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:text="Add"
+        android:onClick="addToDoItem"
+        android:layout_marginTop="20dp"
+        />
+
+</RelativeLayout>
