@@ -10,12 +10,11 @@
         android:visible="true"
         />
 
-    <!--<item-->
-        <!--android:title="Sort"-->
-        <!--android:orderInCategory="2"-->
-        <!--android:id="@+id/sortMenuItem"-->
-        <!--app:showAsAction="ifRoom"-->
-        <!--android:visible="true"-->
-        <!--/>-->
+    <item
+        android:id="@+id/updateDaysRemainingMenuItem"
+        android:title="Update Days Left"
+        app:showAsAction="never"
+        android:visible="true"
+        />
 
 </menu>

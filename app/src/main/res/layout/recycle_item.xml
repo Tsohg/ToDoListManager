@@ -2,40 +2,56 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="100dp"
+    android:layout_height="150dp"
     android:visibility="visible"
+    android:orientation="vertical"
     >
 
     <TextView
         android:layout_width="100dp"
-        android:layout_height="match_parent"
+        android:layout_height="80dp"
         android:id="@+id/dueDateView"
-        android:text="#/##"
-        android:textSize="20dp"
+        android:text="@string/placeholderDate"
+        android:textSize="30dp"
         android:textAlignment="center"
-        android:gravity="center_vertical"
+        android:paddingTop="20dp"
+        android:textColor="@color/black"
         />
 
     <TextView
         android:layout_width="260dp"
-        android:layout_height="match_parent"
-        android:text="placeholderText"
+        android:layout_height="80dp"
+        android:text="@string/placeholdertext"
         android:textSize="30dp"
         android:paddingLeft="10dp"
-        android:gravity="center_vertical"
+        android:paddingTop="20dp"
         android:id="@+id/nameView"
         android:layout_toRightOf="@+id/dueDateView"
+        android:textColor="@color/black"
         />
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="80dp"
         android:layout_toRightOf="@+id/nameView"
         android:text="@string/dots_vertical"
         android:textSize="40dp"
         android:textAlignment="center"
-        android:gravity="center_vertical"
+        android:paddingTop="20dp"
         android:id="@+id/optionDotsView"
+        android:textColor="@color/black"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:text="@string/days_left"
+        android:id="@+id/daysLeftView"
+        android:textSize="25dp"
+        android:layout_below="@+id/dueDateView"
+        android:gravity="center"
+        android:paddingLeft="10dp"
+        android:textColor="@color/black"
         />
 
 </RelativeLayout>

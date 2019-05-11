@@ -17,13 +17,17 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class DB_Item_Adapter extends RecyclerView.Adapter<DB_Item_Adapter.ToDoViewHolder>
 {
     private ArrayList<ToDoRecord> records;
     private static final String TAG = "DB_Item_Adapter";
     private DBM dbm;
+    private SimpleDateFormat formatter = new SimpleDateFormat("MM-dd");
 
     public DB_Item_Adapter(ArrayList<ToDoRecord> allRecords, DBM dbm)
     {
@@ -44,6 +48,7 @@ public class DB_Item_Adapter extends RecyclerView.Adapter<DB_Item_Adapter.ToDoVi
         if(records.size() > 0) {
             toDoViewHolder.nameView.setText(records.get(i).getName());
             toDoViewHolder.dateView.setText(records.get(i).getDueDate());
+            setDaysLeft(toDoViewHolder.daysLeftView, toDoViewHolder.dateView);
 
             toDoViewHolder.options.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -63,9 +68,6 @@ public class DB_Item_Adapter extends RecyclerView.Adapter<DB_Item_Adapter.ToDoVi
                                 case R.id.popup_delete:
                                     handlePopupDelete(toDoViewHolder);
                                     return true;
-//                                case R.id.popup_update:
-//                                    handlePopupUpdate(toDoViewHolder);
-//                                    return true;
                                 default:
                                     Log.d(TAG, "onMenuItemClick: Default reached");
                                     return true;
@@ -88,9 +90,6 @@ public class DB_Item_Adapter extends RecyclerView.Adapter<DB_Item_Adapter.ToDoVi
 
     public void handlePopupDesc(ToDoViewHolder tdvh, View view)
     {
-//        Toast.makeText(MainActivity.mainActivityContextHandle,
-//                "Currently Unimplemented.", Toast.LENGTH_SHORT).show();
-        //Log.d(TAG, "handlePopupDesc: Inside Method");
         ToDoRecord rec = dbm.getRecord(tdvh.nameView.getText().toString());
         AlertDialog.Builder alert = new AlertDialog.Builder(MainActivity.mainActivityContextHandle);
         alert.setMessage(rec.getDescription());
@@ -101,15 +100,12 @@ public class DB_Item_Adapter extends RecyclerView.Adapter<DB_Item_Adapter.ToDoVi
             }
         });
         alert.show();
-        //Log.d(TAG, "handlePopupDesc: After instructions");
     }
+
     //delete from database and view.
     private void handlePopupDelete(ToDoViewHolder tdvh)
     {
         RecyclerView rv = MainActivity.mainActivityContextHandle.findViewById(R.id.recyclerView); //might not get what i am looking for
-//        if(rv == null)
-//            Log.d(TAG, "handlePopupDelete: Recycler View Null");
-//        rv.removeViewAt(0);
 
         dbm.delete(new ToDoRecord(tdvh.dateView.getText().toString(),
                 tdvh.nameView.getText().toString(), ""));
@@ -120,25 +116,33 @@ public class DB_Item_Adapter extends RecyclerView.Adapter<DB_Item_Adapter.ToDoVi
         Log.d(TAG, "handlePopupDelete: View removed.");
     }
 
-//    private void handlePopupUpdate(ToDoViewHolder tdvh)
-//    {
-//        RecyclerView rv = MainActivity.mainActivityContextHandle.findViewById(R.id.recyclerView); //might not get what i am looking for
-//        ToDoRecord record = new ToDoRecord(tdvh.dateView.getText().toString(),
-//                tdvh.nameView.getText().toString(),
-//                )
-//        //update database record
-//
-//        //get new sorted records
-//        records = dbm.getSortedList();
-//
-//        //rebuild rv
-//        rebuildRecyclerView(rv);
-//    }
-
     private void rebuildRecyclerView(RecyclerView rv)
     {
         rv.removeAllViews();
         rv.setAdapter(new DB_Item_Adapter(records, dbm));
+    }
+
+    private void setDaysLeft(TextView daysLeftView, TextView dueDateView)
+    {
+        try
+        {
+            Date d = new Date();
+            Date date1 = formatter.parse(formatter.format(d));
+            Date date2 = formatter.parse(dueDateView.getText().toString());
+            int daysLeft = (int)( (date2.getTime() - date1.getTime()) / (1000 * 60 * 60 * 24) ); //milliseconds to days conversion.
+
+            daysLeftView.setText("Days Left: "+ daysLeft);
+
+            if(daysLeft < 0)
+            {
+                daysLeftView.setTextColor(Color.RED);
+            }
+        }
+        catch (ParseException e)
+        {
+            e.printStackTrace();
+        }
+
     }
 
     public class ToDoViewHolder extends RecyclerView.ViewHolder {
@@ -146,6 +150,7 @@ public class DB_Item_Adapter extends RecyclerView.Adapter<DB_Item_Adapter.ToDoVi
         public TextView dateView;
         public TextView nameView;
         public TextView options;
+        public TextView daysLeftView;
 
         public ToDoViewHolder(@NonNull View itemView)
         {
@@ -153,9 +158,7 @@ public class DB_Item_Adapter extends RecyclerView.Adapter<DB_Item_Adapter.ToDoVi
             dateView = itemView.findViewById(R.id.dueDateView);
             nameView = itemView.findViewById(R.id.nameView);
             options = itemView.findViewById(R.id.optionDotsView);
-            dateView.setTextColor(Color.BLACK);
-            nameView.setTextColor(Color.BLACK);
-            options.setTextColor(Color.BLACK);
+            daysLeftView = itemView.findViewById(R.id.daysLeftView);
         }
     }
 }
