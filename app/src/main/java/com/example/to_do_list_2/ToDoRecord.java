@@ -9,7 +9,7 @@ import java.util.Date;
 
 public class ToDoRecord
 {
-    private String dueDate; //will handle ensuring proper date format at input.
+    private String dueDate;
     private String name;
     private String description;
     private SimpleDateFormat formatter = new SimpleDateFormat("MM-dd");
@@ -59,13 +59,6 @@ public class ToDoRecord
                 "Description: " + description;
     }
 
-    ///could be necessary.
-    public static String formatDateString(String dateString)
-    {
-        //format before returning.
-        return dateString;
-    }
-
     @Override
     public boolean equals(Object obj)
     {
@@ -83,7 +76,7 @@ public class ToDoRecord
             Log.d(TAG, "equals: " + "Null comparison.");
             return false;
         }
-        if(compareMe.getName().compareTo(this.getName()) == 0) //only line needed since name is a PK and is unique.
+        if(compareMe.getName().compareTo(this.getName()) == 0)
             return true;
         else
             return false;
@@ -91,16 +84,9 @@ public class ToDoRecord
 
     public int compareDueDates(ToDoRecord recToCompare)
     {
-//        if(this.dueDate.compareTo(recToCompare.getDueDate()) == 0) //same dates
-//            return 0;
-//        else if(this.dueDate.compareTo(recToCompare.getDueDate()) > 0) //given record is after current record.
-//            return 1;
-//        else //given record is before current record.
-//            return -1;
-
         int result = Integer.MAX_VALUE;
 
-        try //TODO: ERROR IN PARSING CURRENTLY.
+        try
         {
             if (formatter.parse(this.dueDate).compareTo(formatter.parse(recToCompare.getDueDate())) == 0)
                 result = 0;
